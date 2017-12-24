@@ -50,7 +50,7 @@ class App extends React.Component {
         width: 300,
       },
     };
-    return <div style={{width: '500px', margin:"0 auto"}}>
+    return <div style={{width: "500px", margin:"0 auto", marginTop:"100px"}}>
       <TreeSelect {...tProps} />
     </div>
   }
