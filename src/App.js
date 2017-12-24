@@ -1,20 +1,58 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { TreeSelect } from 'antd';
+const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 
-class App extends Component {
+const treeData = [{
+  label: 'Node1',
+  value: '0-0',
+  key: '0-0',
+  children: [{
+    label: 'Child Node1',
+    value: '0-0-0',
+    key: '0-0-0',
+  }],
+}, {
+  label: 'Node2',
+  value: '0-1',
+  key: '0-1',
+  children: [{
+    label: 'Child Node3',
+    value: '0-1-0',
+    key: '0-1-0',
+  }, {
+    label: 'Child Node4',
+    value: '0-1-1',
+    key: '0-1-1',
+  }, {
+    label: 'Child Node5',
+    value: '0-1-2',
+    key: '0-1-2',
+  }],
+}];
+
+class App extends React.Component {
+  state = {
+    value: ['0-0-0'],
+  }
+  onChange = (value) => {
+    console.log('onChange ', value, arguments);
+    this.setState({ value });
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
+    const tProps = {
+      treeData,
+      value: this.state.value,
+      onChange: this.onChange,
+      treeCheckable: true,
+      showCheckedStrategy: SHOW_PARENT,
+      searchPlaceholder: 'Please select',
+      style: {
+        width: 300,
+      },
+    };
+    return <div style={{width: '500px', margin:"0 auto"}}>
+      <TreeSelect {...tProps} />
+    </div>
   }
 }
 
